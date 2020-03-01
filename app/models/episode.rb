@@ -1,3 +1,5 @@
 class Episode < Content
-    belongs_to :season, class_name: "Season", optional: true
+    belongs_to :season, class_name: "Season"
+
+    validates :number, presence: true
 end
