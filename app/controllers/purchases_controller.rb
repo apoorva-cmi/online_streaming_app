@@ -11,11 +11,11 @@ class PurchasesController < ApplicationController
     end
 
     def create
-        unexpired_same_purchases = @user.purchases.where(content_id: @params["content_id"], content_type: @params["content_type"]).not_expired
-        if unexpired_same_purchases.any?
+        same_alive_purchases = @user.purchases.where(content_id: @params["content_id"], content_type: @params["content_type"]).alive
+        if same_alive_purchases.any?
             render json: {
                 status: :ok,
-                response: "The content is already purchased. You can view it in #{unexpired_same_purchases.last.remaining_time_to_watch_in_days}"
+                response: "The content is already purchased. You can view it in #{same_alive_purchases.last.remaining_time_to_watch_in_days}"
             }, status: :ok
         else
             purchase_option = find_purchase_option(@params)

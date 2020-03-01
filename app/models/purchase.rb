@@ -3,7 +3,7 @@ class Purchase < ApplicationRecord
     belongs_to :content
     belongs_to :purchase_option
 
-    scope :not_expired, -> { select{ |purchase| !purchase.expired? } }
+    scope :alive, -> { select{ |purchase| !purchase.expired? } }
 
     validates :content_type, inclusion: { in: %w(Movie Season), message: "%{value} is not a valid content_type" }
 
