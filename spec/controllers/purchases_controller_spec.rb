@@ -57,6 +57,19 @@ RSpec.describe PurchasesController do
         json_response = JSON.parse(response.body)
         expect(response.status).to eq(400)
         expect(json_response["response"]).to eq("The content is already purchased. You can view it in 2 days")
-      end
+    end
+
+    it "JSON body response returns success when same content is purchased after 3 days" do
+      user = FactoryBot.create(:user)
+      season = FactoryBot.create(:season)
+      purchase_option = FactoryBot.create(:purchase_option, purchase_optionable: season)
+      post(:create, params: { purchase: {user_email: user.email, content_id: season.id, content_type: "Season", video_quality: purchase_option.video_quality}})
+      # Attempt to purchase the same content again after 3 days
+      allow(Date).to receive(:today).and_return (Date.today + 3.days)
+      post(:create, params: { purchase: {user_email: user.email, content_id: season.id, content_type: "Season", video_quality: purchase_option.video_quality}})
+      json_response = JSON.parse(response.body)
+      expect(response.status).to eq(200)
+      expect(json_response["response"].keys).to eq(["id", "user_id", "content_id", "content_type", "price", "video_quality", "start_date", "end_date", "created_at", "updated_at", "purchase_option_id"])
+    end
   end
 end
