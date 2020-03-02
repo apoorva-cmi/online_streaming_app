@@ -14,16 +14,16 @@ class PurchasesController < ApplicationController
         same_alive_purchases = @user.purchases.where(content_id: @params["content_id"], content_type: @params["content_type"]).alive
         if same_alive_purchases.any?
             render json: {
-                status: :ok,
+                status: :bad_request,
                 response: "The content is already purchased. You can view it in #{same_alive_purchases.last.remaining_time_to_watch_in_days}"
-            }, status: :ok
+            }, status: :bad_request
         else
             purchase_option = find_purchase_option(@params)
             if purchase_option.nil?
                 render json: {
-                    status: :ok,
+                    status: :not_found,
                     response: "No purchase option found for the #{@params["content_type"]}."
-                }, status: :ok
+                }, status: :not_found
             else
                 purchase = @user.purchases.new
                 purchase.content_id = @params["content_id"]
@@ -46,6 +46,10 @@ class PurchasesController < ApplicationController
 
     def set_user
         @user = User.find_by(email: @params["user_email"])
+        render json: {
+            status: :not_found,
+            response: "User not present. Please SignUp or Login."
+        }, status: :not_found if @user.nil?
     end
 
     def create_params
