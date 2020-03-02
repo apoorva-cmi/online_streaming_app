@@ -1,6 +1,6 @@
 # README
 
-This application is provides the means to purchase an online media on demand basis. Movies and Seasons(with episodes) can be purchased by a user, through purchase options for price and video quality.
+This application is provides the means to purchase an online media on demand basis. Movies and Seasons(with their episodes) can be purchased by a user, through purchase options for price and video quality.
 
 The purchased content is available for 2 days to view.
 
@@ -10,6 +10,7 @@ Run the following commands to setup the application:
 2. bundle install
 3. rails db:setup
 4. rails s
+
 The server will start running on http://localhost:3000/
 
 ### Models and associations:
