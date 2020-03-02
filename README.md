@@ -51,14 +51,14 @@ RSpec is used to test models and controllers. To run tests:
 
 ### System dependencies:
 
-Ruby version 2.3.1
-Rails version 5.1.7
-RSpec
-Postgres
-Bundler version 1.15.4
-Puma 3.12.3
+- Ruby version 2.3.1
+- Rails version 5.1.7
+- RSpec
+- Postgres
+- Bundler version 1.15.4
+- Puma 3.12.3
 
 ### Gems used:
-gem 'active_model_serializers'
-gem 'factory_bot_rails'
-gem 'rspec-rails'
+- gem 'active_model_serializers'
+- gem 'factory_bot_rails'
+- gem 'rspec-rails'
