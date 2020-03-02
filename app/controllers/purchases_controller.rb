@@ -32,7 +32,6 @@ class PurchasesController < ApplicationController
                 purchase.price = purchase_option.price
                 purchase.video_quality = purchase_option.video_quality
                 purchase.start_date = Date.today
-                purchase.end_date = Date.today + 2.days
                 purchase.save
                 render json: {
                     status: :ok,

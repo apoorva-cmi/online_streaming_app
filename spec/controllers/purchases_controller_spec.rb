@@ -52,7 +52,7 @@ RSpec.describe PurchasesController do
         season = FactoryBot.create(:season)
         purchase_option = FactoryBot.create(:purchase_option, purchase_optionable: season)
         post(:create, params: { purchase: {user_email: user.email, content_id: season.id, content_type: "Season", video_quality: purchase_option.video_quality}})
-        # Attemot to purchase the same content again
+        # Attempt to purchase the same content again
         post(:create, params: { purchase: {user_email: user.email, content_id: season.id, content_type: "Season", video_quality: purchase_option.video_quality}})
         json_response = JSON.parse(response.body)
         expect(response.status).to eq(400)
